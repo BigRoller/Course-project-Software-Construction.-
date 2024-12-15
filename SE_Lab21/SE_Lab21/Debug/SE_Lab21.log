@@ -1,0 +1,43 @@
+﻿Сборка начата 15.12.2024 15:53:06.
+Уровень детализации журнала: Normal.     1>Проект "C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\SE_Lab21\SE_Lab21.vcxproj" в узле 2 (целевые объекты Build).
+     1>InitializeBuildStatus:
+         Создание "Debug\SE_Lab21.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
+         Обращение к "Debug\SE_Lab21.tlog\unsuccessfulbuild".
+       ClCompile:
+         Для всех выходных данных обновления не требуется.
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /permissive- /Yu"stdafx.h" /Fp"Debug\SE_Lab21.pch" /Fo"Debug\\" /Fd"Debug\vc143.pdb" /external:W3 /Gd /TP /analyze- /FC /errorReport:prompt SE_Lab14.cpp
+         SE_Lab14.cpp
+     1>C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\SE_Lab21\Log.h(5,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+       Link:
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\SE_Lab21.exe" /INCREMENTAL /ILK:"Debug\SE_Lab21.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\SE_Lab21.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\SE_Lab21.lib" /MACHINE:X86 Debug\CodeGeneration.obj
+         Debug\Error.obj
+         Debug\FST.obj
+         Debug\GRB.obj
+         Debug\In.obj
+         Debug\IT.obj
+         Debug\Lexer.obj
+         Debug\Log.obj
+         Debug\LT.obj
+         Debug\MFST.obj
+         Debug\Out.obj
+         Debug\Parm.obj
+         Debug\PolishNotation.obj
+         Debug\SA.obj
+         Debug\SE_Lab14.obj
+         Debug\stdafx.obj
+         SE_Lab21.vcxproj -> C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\SE_Lab21.exe
+       FinalizeBuildStatus:
+         Файл "Debug\SE_Lab21.tlog\unsuccessfulbuild" удаляется.
+         Обращение к "Debug\SE_Lab21.tlog\SE_Lab21.lastbuildstate".
+     1>Сборка проекта "C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\SE_Lab21\SE_Lab21.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+       "C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\SE_Lab21\SE_Lab21.vcxproj" (целевой объект Build ) (1) ->
+       (Целевой объект ClCompile) -> 
+         C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\SE_Lab21\Log.h(5,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
+
+    Предупреждений: 1
+    Ошибок: 0
+
+Прошло времени 00:00:01.67

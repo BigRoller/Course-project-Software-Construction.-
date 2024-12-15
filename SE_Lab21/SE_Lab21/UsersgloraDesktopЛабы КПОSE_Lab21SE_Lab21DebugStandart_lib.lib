@@ -1,0 +1,86 @@
+.586
+.model flat, stdcall
+includelib kernel32.lib
+includelib libucrt.lib
+includelib "C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\Standart_lib.lib"
+ExitProcess PROTO : DWORD
+GLOBAL_fi_1 PROTO  : DWORD,  : DWORD
+GLOBAL_fs_1 PROTO  : DWORD,  : DWORD
+extern _substr : PROC
+extern _strlen : PROC
+extern _write : PROC
+extern _writeline : PROC
+
+.stack 4096
+.const
+ZERO_DIVISION BYTE "zero division", 0
+TYPE_OVERFLOW BYTE "type overflow", 0
+l1 SDWORD 1
+l2 SDWORD 3
+l3 SDWORD 111
+l4 SDWORD 511
+l5 SDWORD 's'
+l6 SDWORD -18
+l7 SDWORD -15
+l8 BYTE "1234567890hisdhfisudhfoiauhfoehfoahaihareuhraeggrhuh", 0
+l9 BYTE "1234567890", 0
+l10 SDWORD 0
+l11 SDWORD 7
+l12 SDWORD 1
+l13 BYTE "привет", 0
+l14 BYTE "контрольный пример", 0
+l15 SDWORD 0
+
+.data
+fi_z_2 SDWORD 0
+fs_c_2 BYTE 256 dup(0)
+main_x_2 SDWORD 0
+main_y_2 SDWORD 0
+main_z_2 SDWORD 0
+main_q_2 SDWORD 0
+main_a_2 SDWORD 0
+main_b_2 SDWORD 0
+main_c_2 SDWORD 0
+main_d_2 SDWORD 0
+main_m_2 SDWORD 0
+main_sa_2 BYTE 256 dup(0)
+main_sb_2 BYTE 256 dup(0)
+main_sc_2 BYTE 256 dup(0)
+
+.code
+ERROR_ZERO_DIVISION:
+push OFFSET ZERO_DIVISION
+call _writeline
+push -1
+call ExitProcess
+ERROR_TYPE_OVERFLOW:
+push OFFSET TYPE_OVERFLOW
+call _writeline
+push -1
+call ExitProcess
+GLOBAL_fi_1 PROC uses eax ebx ecx edi esi, fi_x_1_parm : DWORD, fi_y_1_parm : DWORD
+push fi_x_1_parm 
+push fi_x_1_parm 
+push fi_y_1_parm 
+pop eax
+pop ebx
+add eax, ebx
+push eax
+pop eax
+pop ebx
+imul eax, ebx
+push eax
+pop fi_z_2 
+GLOBAL_fi_1 ENDP
+GLOBAL_fs_1 PROC uses eax ebx ecx edi esi, fs_a_1_parm : DWORD, fs_b_1_parm : DWORD
+push fs_a_1_parm 
+push l1 
+push l2 
+call _substr 
+pop fs_c_2 
+GLOBAL_fs_1 ENDP
+main PROC
+push 0
+call ExitProcess
+main ENDP
+end main

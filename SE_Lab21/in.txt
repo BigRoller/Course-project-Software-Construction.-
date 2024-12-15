@@ -1,0 +1,50 @@
+integer function fi(integer x, integer y)
+{
+declare integer z;
+z= x*(x+y);
+return z; 
+}; 
+string function fs (string a, string b)
+{
+declare string c;
+declare string function substr(string a, integer p,
+                    integer n);
+c = substr(a, 2, 3);
+
+return c; 
+};
+
+main()
+{
+
+
+declare integer y;
+declare integer z;
+declare integer a;
+declare byte b;
+declare byte x;
+declare integer c;
+declare string sa;
+declare string sb;
+declare string sc;
+declare integer function strlen(string p);
+a = 111;
+c = -a;
+y = 's' + (-0o22);
+x = 0o32;
+sa = "очень длинная строка, которая правильно обрабатывается";
+sb = "1234567890"; 
+z = fi(a,y);
+sc = fs(sa, sb);
+for (x = 0; x < 7; x = x + 1;)
+{
+  writeline "привет";
+}
+write sc;
+writeint strlen(sc);
+writeline " ";
+declare integer function stoi(string d);
+writeint stoi("-123");
+
+return 0;
+};

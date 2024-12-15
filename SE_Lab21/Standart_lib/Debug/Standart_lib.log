@@ -1,0 +1,21 @@
+﻿Сборка начата 13.12.2024 21:11:49.
+Уровень детализации журнала: Normal.     1>Проект "C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Standart_lib\Standart_lib.vcxproj" в узле 2 (целевые объекты Build).
+     1>InitializeBuildStatus:
+         Создание "Debug\Standart_lib.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
+         Обращение к "Debug\Standart_lib.tlog\unsuccessfulbuild".
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\bin\HostX86\x86\CL.exe /c /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /permissive- /Fo"Debug\\" /Fd"C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\Standart_lib.pdb" /external:W3 /Gd /TP /analyze- /FC /errorReport:prompt Standart_lib.cpp
+         Standart_lib.cpp
+       Lib:
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\bin\HostX86\x86\Lib.exe /OUT:"C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\Standart_lib.lib" /NOLOGO /MACHINE:X86 Debug\Standart_lib.obj
+         Standart_lib.vcxproj -> C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\Standart_lib.lib
+       FinalizeBuildStatus:
+         Файл "Debug\Standart_lib.tlog\unsuccessfulbuild" удаляется.
+         Обращение к "Debug\Standart_lib.tlog\Standart_lib.lastbuildstate".
+     1>Сборка проекта "C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Standart_lib\Standart_lib.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+    Предупреждений: 0
+    Ошибок: 0
+
+Прошло времени 00:00:01.28
