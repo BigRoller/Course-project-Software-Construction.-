@@ -56,7 +56,7 @@ void PN::PolishNotation(LT::LexTable& lextable, IT::IdTable& idtable) {
 					if (!commaStack.empty()) commaStack.top()++;
 				}
 				else if (array.table[j].lexema == LEX_UNARY_MINUS) {
-					operatorStack.push(array.table[j]);
+					output.push(array.table[j]);
 				}
 			}
 

@@ -26,13 +26,16 @@ void SA::performSemanticAnalysis(LT::LexTable lextable, IT::IdTable idtable)
 					if (lextable.table[j].stringLexema == function.stringLexema) {
 						for (int k = j + 1; lextable.table[k].lexema != LEX_RIGHTHESIS; k++) {
  							if (lextable.table[k].lexema == LEX_ID || lextable.table[k].lexema == LEX_LITERAL) {
+								if (currentParametersCount == counter) {
+									throw ERROR_THROW_IN(204, lextable.table[j].sn, -1)
+								}
 								// string => string
 								if (IT::GetEntry(idtable, entryVector[counter].idxTI + 1).iddatatype == IT::STR) {
 									if (IT::GetEntry(idtable, lextable.table[k].idxTI + 1).iddatatype == IT::STR) {
 										counter++;
 									}
 									else {
-										break;
+										throw ERROR_THROW_IN(204, lextable.table[j].sn, -1)
 									}
 								} 
 								// byte, symbol, integer => integer
@@ -44,7 +47,7 @@ void SA::performSemanticAnalysis(LT::LexTable lextable, IT::IdTable idtable)
 										counter++;
 									}
 									else {
-										break;
+										throw ERROR_THROW_IN(204, lextable.table[j].sn, -1)
 									}
 								}
 								// byte, symbol => symbol
@@ -55,7 +58,7 @@ void SA::performSemanticAnalysis(LT::LexTable lextable, IT::IdTable idtable)
 										counter++;
 									}
 									else {
-										break;
+										throw ERROR_THROW_IN(204, lextable.table[j].sn, -1)
 									}
 								}
 								// symbol, byte => byte
@@ -66,16 +69,10 @@ void SA::performSemanticAnalysis(LT::LexTable lextable, IT::IdTable idtable)
 										counter++;
 									}
 									else {
-										break;
+										throw ERROR_THROW_IN(204, lextable.table[j].sn, -1)
 									}
 								}
 							}
-						}
-						if (counter != currentParametersCount) {
-							throw ERROR_THROW_IN(204, lextable.table[j].sn, -1)
-						}
-						else {
-							counter = 0;
 						}
 					}
 				}

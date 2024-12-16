@@ -8,7 +8,8 @@
 #include <vector>
 
 #define OUTPUT_PATH "C:\\Users\\glora\\Desktop\\À‡·˚  œŒ\\SE_Lab21\\SE_Lab21\\Asm.asm\\Asm.asm"
-#define STANDART_LIB_PATH "includelib \"C:\\Users\\glora\\Desktop\\À‡·˚  œŒ\\SE_Lab21\\SE_Lab21\\Debug\\Standart_lib.lib\"\n"
+#define LIB_PATH "C:\\Users\\glora\\Desktop\\À‡·˚  œŒ\\SE_Lab21\\SE_Lab21\\Debug\\Standart_lib.lib"
+#define STANDART_LIB_PATH ("includelib \"" + (string)LIB_PATH + "\"\n").c_str()
 
 #define STRING_ID(i) IT::GetEntry(cg.idT, cg.lexT.table[i].idxTI + 1).sufix + "_" + IT::GetEntry(cg.idT, cg.lexT.table[i].idxTI + 1).id + "_" + std::to_string(IT::GetEntry(cg.idT, cg.lexT.table[i].idxTI + 1).scope)
 #define CHAR_ID(i) (IT::GetEntry(cg.idT, cg.lexT.table[i].idxTI + 1).sufix + "_" + IT::GetEntry(cg.idT, cg.lexT.table[i].idxTI + 1).id + "_" + std::to_string(IT::GetEntry(cg.idT, cg.lexT.table[i].idxTI + 1).scope)).c_str()
@@ -149,4 +150,5 @@ namespace CG
 	};
 	
 	void GenerateCode(IT::IdTable, LT::LexTable, MFST::Mfst);
+
 }

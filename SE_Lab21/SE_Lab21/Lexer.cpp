@@ -358,7 +358,7 @@ std::string GetLexAndIdTable(LT::LexTable& lextable, IT::IdTable& idtable, char*
 
 			bool isSignature = false;
 			// Проверка на сигнатуру
-			if (i >= 4 && (LT::GetEntry(lextable, i - 3).lexema == LEX_FUNCTION || LT::GetEntry(lextable, i - 1).lexema == LEX_COMMA)) {
+			if (i >= 4 && (LT::GetEntry(lextable, i - 3).lexema == LEX_FUNCTION || LT::GetEntry(lextable, i - 1).lexema == LEX_COMMA) && LT::GetEntry(lextable, i).lexema != LEX_UNARY_MINUS) {
 				int index = i - 1;
 				while (index > 0 && LT::GetEntry(lextable, index + 1).lexema != LEX_FUNCTION) { index--; }
 				if (index >= 2 && LT::GetEntry(lextable, index - 1).lexema == LEX_DECLARE) {
@@ -399,7 +399,7 @@ std::string GetLexAndIdTable(LT::LexTable& lextable, IT::IdTable& idtable, char*
 					for (; findid != entryList.end(); findid++) {
 						if (i > 1 && findid->id == word && LT::GetEntry(lextable, i - 1).lexema != LEX_DECLARE
 							&& LT::GetEntry(lextable, findid->idxfirstLE - 1).lexema == LEX_DECLARE
-							|| findid->id == word && findid->idtype == IT::P) {
+							|| findid->id == word && findid->idtype == IT::P && LT::GetEntry(lextable, i - 1).lexema != LEX_DECLARE) {
 							break;
 						}
 					}
@@ -623,6 +623,9 @@ std::string GetLexAndIdTable(LT::LexTable& lextable, IT::IdTable& idtable, char*
 			else {
 				throw ERROR_THROW_IN(208, lineNumber, lineIndex)
 			}
+		}
+		else {
+			throw ERROR_THROW(106, lineNumber, lineIndex)
 		}
 		if (buff[buff.length() - 1] != '\n') {
 			ltentry.lexema = buff[buff.length() - 1];

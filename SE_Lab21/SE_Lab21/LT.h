@@ -36,6 +36,7 @@ namespace LT
 		int idxTI; // индекс в таблице индентификаторов
 		short operation;
 		int scope;
+		bool isNeg = false;
 		enum OPERATION_RANG {
 			NOT_OPERATOR = -1,
 			ZERO = 0,

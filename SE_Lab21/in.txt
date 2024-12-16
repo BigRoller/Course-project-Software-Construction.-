@@ -30,11 +30,12 @@ declare string sc;
 declare integer function strlen(string p);
 a = 111;
 c = -a;
-y = 's' + (-0o22);
+declare integer function stoi(string d);
+writeint stoi("-123") + 0o32;
 x = 0o32;
 sa = "очень длинная строка, которая правильно обрабатывается";
 sb = "1234567890"; 
-z = fi(a,y);
+z = fi("asd",y);
 sc = fs(sa, sb);
 for (x = 0; x < 7; x = x + 1;)
 {
@@ -43,8 +44,6 @@ for (x = 0; x < 7; x = x + 1;)
 write sc;
 writeint strlen(sc);
 writeline " ";
-declare integer function stoi(string d);
-writeint stoi("-123");
 
 return 0;
 };

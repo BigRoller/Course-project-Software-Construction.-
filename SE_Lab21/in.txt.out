@@ -26,20 +26,19 @@
 26 declare integer function strlen(string p);
 27 a = 111;
 28 c = -a;
-29 y = 's' + (-0o22);
-30 x = 0o32;
-31 sa = "очень длинная строка, которая правильно обрабатывается";
-32 sb = "1234567890"; 
-33 z = fi(a,y);
-34 sc = fs(sa, sb);
-35 for (x = 0; x < 7; x = x + 1;)
-36 {
-37  writeline "привет";
-38 }
-39 write sc;
-40 writeint strlen(sc);
-41 writeline " ";
-42 declare integer function stoi(string d);
-43 writeint stoi("-123");
-44 return 0;
-45 };
+29 declare integer function stoi(string d);
+30 writeint stoi("-123") + 0o32;
+31 x = 0o32;
+32 sa = "очень длинная строка, которая правильно обрабатывается";
+33 sb = "1234567890"; 
+34 z = fi("asd",y);
+35 sc = fs(sa, sb);
+36 for (x = 0; x < 7; x = x + 1;)
+37 {
+38  writeline "привет";
+39 }
+40 write sc;
+41 writeint strlen(sc);
+42 writeline " ";
+43 return 0;
+44 };

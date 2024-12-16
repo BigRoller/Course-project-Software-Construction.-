@@ -39,7 +39,12 @@ void IT::Add(IdTable& idtable, Entry& entry)
 
 IT::Entry IT::GetEntry(IdTable& idtable, int n)
 {
- 	return idtable.table[n - 1];
+	if (n > 0 && n <= idtable.size) {
+		return idtable.table[n - 1];
+	}
+	else {
+		throw ERROR_THROW(1)
+	}
 }
 
 int IT::IsId(IdTable& idtable, std::string id)

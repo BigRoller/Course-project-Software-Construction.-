@@ -1,13 +1,13 @@
-﻿Сборка начата 15.12.2024 20:18:59.
+﻿Сборка начата 16.12.2024 13:13:02.
 Уровень детализации журнала: Normal.     1>Проект "C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Asm.asm\Asm.asm.vcxproj" в узле 2 (целевые объекты Build).
      1>InitializeBuildStatus:
          Создание "Debug\Asm.asm.tlog\unsuccessfulbuild", так как было задано "AlwaysCreate".
          Обращение к "Debug\Asm.asm.tlog\unsuccessfulbuild".
        _MASM:
          Assembling Asm.asm...
-         cmd.exe /C "C:\Users\glora\AppData\Local\Temp\tmp66932b750d4648de952972b224ab9921.cmd"
+         cmd.exe /C "C:\Users\glora\AppData\Local\Temp\tmp9987fb85879d4ed392bb75296df42140.cmd"
          ml.exe /c /nologo /Zi /Fo"Debug\Asm.obj" /Fl"Debug\\" /W3 /errorReport:prompt  /TaAsm.asm
-     1>Asm.asm(110): warning A6004: procedure argument or local not referenced : fs_b_1_parm
+     1>Asm.asm(109): warning A6004: procedure argument or local not referenced : fs_b_1_parm
        Link:
          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\Asm.asm.exe" /INCREMENTAL /ILK:"Debug\Asm.asm.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\Asm.asm.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\Asm.asm.lib" /MACHINE:X86 "C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\Standart_lib.lib" Debug\Asm.obj
          Asm.asm.vcxproj -> C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Debug\Asm.asm.exe
@@ -20,9 +20,9 @@
 
        "C:\Users\glora\Desktop\Лабы КПО\SE_Lab21\SE_Lab21\Asm.asm\Asm.asm.vcxproj" (целевой объект Build ) (1) ->
        (Целевой объект _MASM) -> 
-         Asm.asm(110): warning A6004: procedure argument or local not referenced : fs_b_1_parm
+         Asm.asm(109): warning A6004: procedure argument or local not referenced : fs_b_1_parm
 
     Предупреждений: 1
     Ошибок: 0
 
-Прошло времени 00:00:01.79
+Прошло времени 00:00:00.60

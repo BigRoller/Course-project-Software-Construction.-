@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.37.32824.0	    12/15/24 20:19:00
+Microsoft (R) Macro Assembler Version 14.37.32824.0	    12/16/24 13:13:03
 Asm.asm							     Page 1 - 1
 
 
@@ -14,10 +14,10 @@ Asm.asm							     Page 1 - 1
 				GLOBAL_fs_1 PROTO  : DWORD,  : DWORD
 				extern __substr : PROC
 				extern __strlen : PROC
+				extern __stoi : PROC
+				extern __writeint : PROC
 				extern __writeline : PROC
 				extern __write : PROC
-				extern __writeint : PROC
-				extern __stoi : PROC
 
 				.stack 4096
  00000000			.const
@@ -30,10 +30,10 @@ Asm.asm							     Page 1 - 1
  0000001C 00000002		l1 SDWORD 2
  00000020 00000003		l2 SDWORD 3
  00000024 0000006F		l3 SDWORD 111
- 00000028 00000073		l4 SDWORD 's'
- 0000002C FFFFFFEE		l5 SDWORD -18
- 00000030 0000001A		l6 SDWORD 26
- 00000034 EE F7 E5 ED FC	l7 BYTE "очень длинная строка, которая правильно обрабатывается", 0
+ 00000028 2D 31 32 33 00	l4 BYTE "-123", 0
+ 0000002D 0000001A		l5 SDWORD 26
+ 00000031 0000001A		l6 SDWORD 26
+ 00000035 EE F7 E5 ED FC	l7 BYTE "очень длинная строка, которая правильно обрабатывается", 0
 	   20 E4 EB E8 ED
 	   ED E0 FF 20 F1
 	   F2 F0 EE EA E0
@@ -44,17 +44,16 @@ Asm.asm							     Page 1 - 1
 	   EE E1 F0 E0 E1
 	   E0 F2 FB E2 E0
 	   E5 F2 F1 FF 00
- 0000006B 31 32 33 34 35	l8 BYTE "1234567890", 0
+ 0000006C 31 32 33 34 35	l8 BYTE "1234567890", 0
 	   36 37 38 39 30
 	   00
- 00000076 00000000		l9 SDWORD 0
- 0000007A 00000007		l10 SDWORD 7
- 0000007E 00000001		l11 SDWORD 1
- 00000082 EF F0 E8 E2 E5	l12 BYTE "привет", 0
+ 00000077 00000000		l9 SDWORD 0
+ 0000007B 00000007		l10 SDWORD 7
+ 0000007F 00000001		l11 SDWORD 1
+ 00000083 EF F0 E8 E2 E5	l12 BYTE "привет", 0
 	   F2 00
- 00000089 20 00			l13 BYTE " ", 0
- 0000008B 2D 31 32 33 00	l14 BYTE "-123", 0
- 00000090 00000000		l15 SDWORD 0
+ 0000008A 20 00			l13 BYTE " ", 0
+ 0000008C 00000000		l14 SDWORD 0
 
  00000000			.data
  00000000 00000000		fi_z_2 SDWORD 0
@@ -137,7 +136,7 @@ Asm.asm							     Page 1 - 1
  000000A4  B8 00000004 R	mov eax, OFFSET fs_c_2
 				ret
  000000AD			GLOBAL_fs_1 ENDP
-Asm.asm(110) : warning A6004:procedure argument or local not referenced : fs_b_1_parm
+Asm.asm(109) : warning A6004:procedure argument or local not referenced : fs_b_1_parm
 
  000000AD			main PROC
  000000AD  68 000004E3		push 1251d
@@ -161,131 +160,124 @@ Asm.asm(110) : warning A6004:procedure argument or local not referenced : fs_b_1
  00000102  3D 80000000		cmp eax, -2147483648
  00000107  0F 8C FFFFFF04	 jl ERROR_TYPE_OVERFLOW
  0000010D  8F 05 00000118 R	pop main_c_2 
- 00000113  FF 35 0000002C R	push l5
- 00000119  A1 0000002C R	mov eax, l5
- 0000011E  FF 35 00000028 R	push l4
- 00000124  A1 00000028 R	mov eax, l4
+ 00000113  68 00000028 R	push OFFSET l4 
+ 00000118  E8 00000000 E	call __stoi 
+ 0000011D  50			push eax
+ 0000011E  FF 35 0000002D R	push l5
+ 00000124  A1 0000002D R	mov eax, l5
  00000129  58			pop eax
  0000012A  5B			pop ebx
  0000012B  03 C3		add eax, ebx
  0000012D  50			push eax
- 0000012E  3D 7FFFFFFF		cmp eax, 2147483647
- 00000133  0F 8F FFFFFED8	jg ERROR_TYPE_OVERFLOW
- 00000139  3D 80000000		cmp eax, -2147483648
- 0000013E  0F 8C FFFFFECD	 jl ERROR_TYPE_OVERFLOW
- 00000144  8F 05 00000104 R	pop main_y_2 
- 0000014A  FF 35 00000030 R	push l6
- 00000150  A1 00000030 R	mov eax, l6
- 00000155  3D 00000100		cmp eax, 256
- 0000015A  0F 8F FFFFFEB1	jg ERROR_TYPE_OVERFLOW
- 00000160  83 F8 00		cmp eax, 0
- 00000163  0F 8C FFFFFEA8	jl ERROR_TYPE_OVERFLOW
- 00000169  8F 05 00000114 R	pop main_x_2 
- 0000016F  68 00000034 R	push OFFSET l7 
- 00000174  5E			pop esi
- 00000175  BF 0000011C R	mov edi, offset main_sa_2
- 0000017A			copy_loop1:
- 0000017A  8A 06		mov al, [esi]
- 0000017C  88 07		mov[edi], al
- 0000017E  46			inc esi
- 0000017F  47			inc edi
- 00000180  3C 00		cmp al, 0
- 00000182  75 F6		jne copy_loop1
- 00000184  68 0000006B R	push OFFSET l8 
- 00000189  5E			pop esi
- 0000018A  BF 0000021C R	mov edi, offset main_sb_2
- 0000018F			copy_loop2:
- 0000018F  8A 06		mov al, [esi]
- 00000191  88 07		mov[edi], al
- 00000193  46			inc esi
- 00000194  47			inc edi
- 00000195  3C 00		cmp al, 0
- 00000197  75 F6		jne copy_loop2
- 00000199  FF 35 0000010C R	push main_a_2
- 0000019F  A1 0000010C R	mov eax, main_a_2
- 000001A4  FF 35 00000104 R	push main_y_2
- 000001AA  A1 00000104 R	mov eax, main_y_2
- 000001AF  E8 FFFFFE6E		call GLOBAL_fi_1 
- 000001B4  50			push eax
- 000001B5  3D 7FFFFFFF		cmp eax, 2147483647
- 000001BA  0F 8F FFFFFE51	jg ERROR_TYPE_OVERFLOW
- 000001C0  3D 80000000		cmp eax, -2147483648
- 000001C5  0F 8C FFFFFE46	 jl ERROR_TYPE_OVERFLOW
- 000001CB  8F 05 00000108 R	pop main_z_2 
- 000001D1  68 0000011C R	push OFFSET main_sa_2 
- 000001D6  68 0000021C R	push OFFSET main_sb_2 
- 000001DB  E8 FFFFFE8A		call GLOBAL_fs_1 
- 000001E0  50			push eax
- 000001E1  5E			pop esi
- 000001E2  BF 0000031C R	mov edi, offset main_sc_2
- 000001E7			copy_loop3:
- 000001E7  8A 06		mov al, [esi]
- 000001E9  88 07		mov[edi], al
- 000001EB  46			inc esi
- 000001EC  47			inc edi
- 000001ED  3C 00		cmp al, 0
- 000001EF  75 F6		jne copy_loop3
- 000001F1  FF 35 00000076 R	push l9
- 000001F7  A1 00000076 R	mov eax, l9
- 000001FC  3D 00000100		cmp eax, 256
- 00000201  0F 8F FFFFFE0A	jg ERROR_TYPE_OVERFLOW
- 00000207  83 F8 00		cmp eax, 0
- 0000020A  0F 8C FFFFFE01	jl ERROR_TYPE_OVERFLOW
- 00000210  8F 05 00000114 R	pop main_x_2 
- 00000216  FF 35 0000007A R	push l10
- 0000021C  A1 0000007A R	mov eax, l10
- 00000221  FF 35 00000114 R	push main_x_2
- 00000227  A1 00000114 R	mov eax, main_x_2
- 0000022C  58			pop eax
- 0000022D  5B			pop ebx
- 0000022E  3B C3		cmp eax, ebx
- 00000230  72 02		jb FLAG0
- 00000232  73 5D		jae FOR_END0
- 00000234			FLAG0:
- 00000234  68 00000082 R	push OFFSET l12 
- 00000239  E8 00000000 E	call __writeline
- 0000023E  FF 35 0000007E R	push l11
- 00000244  A1 0000007E R	mov eax, l11
- 00000249  FF 35 00000114 R	push main_x_2
- 0000024F  A1 00000114 R	mov eax, main_x_2
- 00000254  58			pop eax
- 00000255  5B			pop ebx
- 00000256  03 C3		add eax, ebx
- 00000258  50			push eax
- 00000259  3D 00000100		cmp eax, 256
- 0000025E  0F 8F FFFFFDAD	jg ERROR_TYPE_OVERFLOW
- 00000264  83 F8 00		cmp eax, 0
- 00000267  0F 8C FFFFFDA4	jl ERROR_TYPE_OVERFLOW
- 0000026D  8F 05 00000114 R	pop main_x_2 
- 00000273  FF 35 0000007A R	push l10
- 00000279  A1 0000007A R	mov eax, l10
- 0000027E  FF 35 00000114 R	push main_x_2
- 00000284  A1 00000114 R	mov eax, main_x_2
- 00000289  58			pop eax
- 0000028A  5B			pop ebx
- 0000028B  3B C3		cmp eax, ebx
- 0000028D  72 A5		jb FLAG0
- 0000028F  73 00		jae FOR_END0
- 00000291			FOR_END0:
- 00000291  68 0000031C R	push OFFSET main_sc_2 
- 00000296  E8 00000000 E	call __write
- 0000029B  68 0000031C R	push OFFSET main_sc_2 
- 000002A0  E8 00000000 E	call __strlen 
- 000002A5  50			push eax
- 000002A6  E8 00000000 E	call __writeint
- 000002AB  68 00000089 R	push OFFSET l13 
- 000002B0  E8 00000000 E	call __writeline
- 000002B5  68 0000008B R	push OFFSET l14 
- 000002BA  E8 00000000 E	call __stoi 
- 000002BF  50			push eax
- 000002C0  E8 00000000 E	call __writeint
- 000002C5  FF 35 00000090 R	push l15
- 000002CB  A1 00000090 R	mov eax, l15
- 000002D0  A1 00000090 R	mov eax, l15
- 000002D5  E8 00000000 E	call ExitProcess
- 000002DA			main ENDP
+ 0000012E  E8 00000000 E	call __writeint
+ 00000133  FF 35 00000031 R	push l6
+ 00000139  A1 00000031 R	mov eax, l6
+ 0000013E  3D 00000100		cmp eax, 256
+ 00000143  0F 8F FFFFFEC8	jg ERROR_TYPE_OVERFLOW
+ 00000149  83 F8 00		cmp eax, 0
+ 0000014C  0F 8C FFFFFEBF	jl ERROR_TYPE_OVERFLOW
+ 00000152  8F 05 00000114 R	pop main_x_2 
+ 00000158  68 00000035 R	push OFFSET l7 
+ 0000015D  5E			pop esi
+ 0000015E  BF 0000011C R	mov edi, offset main_sa_2
+ 00000163			copy_loop1:
+ 00000163  8A 06		mov al, [esi]
+ 00000165  88 07		mov[edi], al
+ 00000167  46			inc esi
+ 00000168  47			inc edi
+ 00000169  3C 00		cmp al, 0
+ 0000016B  75 F6		jne copy_loop1
+ 0000016D  68 0000006C R	push OFFSET l8 
+ 00000172  5E			pop esi
+ 00000173  BF 0000021C R	mov edi, offset main_sb_2
+ 00000178			copy_loop2:
+ 00000178  8A 06		mov al, [esi]
+ 0000017A  88 07		mov[edi], al
+ 0000017C  46			inc esi
+ 0000017D  47			inc edi
+ 0000017E  3C 00		cmp al, 0
+ 00000180  75 F6		jne copy_loop2
+ 00000182  FF 35 0000010C R	push main_a_2
+ 00000188  A1 0000010C R	mov eax, main_a_2
+ 0000018D  FF 35 00000104 R	push main_y_2
+ 00000193  A1 00000104 R	mov eax, main_y_2
+ 00000198  E8 FFFFFE85		call GLOBAL_fi_1 
+ 0000019D  50			push eax
+ 0000019E  3D 7FFFFFFF		cmp eax, 2147483647
+ 000001A3  0F 8F FFFFFE68	jg ERROR_TYPE_OVERFLOW
+ 000001A9  3D 80000000		cmp eax, -2147483648
+ 000001AE  0F 8C FFFFFE5D	 jl ERROR_TYPE_OVERFLOW
+ 000001B4  8F 05 00000108 R	pop main_z_2 
+ 000001BA  68 0000011C R	push OFFSET main_sa_2 
+ 000001BF  68 0000021C R	push OFFSET main_sb_2 
+ 000001C4  E8 FFFFFEA1		call GLOBAL_fs_1 
+ 000001C9  50			push eax
+ 000001CA  5E			pop esi
+ 000001CB  BF 0000031C R	mov edi, offset main_sc_2
+ 000001D0			copy_loop3:
+ 000001D0  8A 06		mov al, [esi]
+ 000001D2  88 07		mov[edi], al
+ 000001D4  46			inc esi
+ 000001D5  47			inc edi
+ 000001D6  3C 00		cmp al, 0
+ 000001D8  75 F6		jne copy_loop3
+ 000001DA  FF 35 00000077 R	push l9
+ 000001E0  A1 00000077 R	mov eax, l9
+ 000001E5  3D 00000100		cmp eax, 256
+ 000001EA  0F 8F FFFFFE21	jg ERROR_TYPE_OVERFLOW
+ 000001F0  83 F8 00		cmp eax, 0
+ 000001F3  0F 8C FFFFFE18	jl ERROR_TYPE_OVERFLOW
+ 000001F9  8F 05 00000114 R	pop main_x_2 
+ 000001FF  FF 35 0000007B R	push l10
+ 00000205  A1 0000007B R	mov eax, l10
+ 0000020A  FF 35 00000114 R	push main_x_2
+ 00000210  A1 00000114 R	mov eax, main_x_2
+ 00000215  58			pop eax
+ 00000216  5B			pop ebx
+ 00000217  3B C3		cmp eax, ebx
+ 00000219  72 02		jb FLAG0
+ 0000021B  73 5D		jae FOR_END0
+ 0000021D			FLAG0:
+ 0000021D  68 00000083 R	push OFFSET l12 
+ 00000222  E8 00000000 E	call __writeline
+ 00000227  FF 35 0000007F R	push l11
+ 0000022D  A1 0000007F R	mov eax, l11
+ 00000232  FF 35 00000114 R	push main_x_2
+ 00000238  A1 00000114 R	mov eax, main_x_2
+ 0000023D  58			pop eax
+ 0000023E  5B			pop ebx
+ 0000023F  03 C3		add eax, ebx
+ 00000241  50			push eax
+ 00000242  3D 00000100		cmp eax, 256
+ 00000247  0F 8F FFFFFDC4	jg ERROR_TYPE_OVERFLOW
+ 0000024D  83 F8 00		cmp eax, 0
+ 00000250  0F 8C FFFFFDBB	jl ERROR_TYPE_OVERFLOW
+ 00000256  8F 05 00000114 R	pop main_x_2 
+ 0000025C  FF 35 0000007B R	push l10
+ 00000262  A1 0000007B R	mov eax, l10
+ 00000267  FF 35 00000114 R	push main_x_2
+ 0000026D  A1 00000114 R	mov eax, main_x_2
+ 00000272  58			pop eax
+ 00000273  5B			pop ebx
+ 00000274  3B C3		cmp eax, ebx
+ 00000276  72 A5		jb FLAG0
+ 00000278  73 00		jae FOR_END0
+ 0000027A			FOR_END0:
+ 0000027A  68 0000031C R	push OFFSET main_sc_2 
+ 0000027F  E8 00000000 E	call __write
+ 00000284  68 0000031C R	push OFFSET main_sc_2 
+ 00000289  E8 00000000 E	call __strlen 
+ 0000028E  50			push eax
+ 0000028F  E8 00000000 E	call __writeint
+ 00000294  68 0000008A R	push OFFSET l13 
+ 00000299  E8 00000000 E	call __writeline
+ 0000029E  FF 35 0000008C R	push l14
+ 000002A4  A1 0000008C R	mov eax, l14
+ 000002A9  A1 0000008C R	mov eax, l14
+ 000002AE  E8 00000000 E	call ExitProcess
+ 000002B3			main ENDP
 				end main
-Microsoft (R) Macro Assembler Version 14.37.32824.0	    12/15/24 20:19:00
+Microsoft (R) Macro Assembler Version 14.37.32824.0	    12/16/24 13:13:03
 Asm.asm							     Symbols 2 - 1
 
 
@@ -295,11 +287,11 @@ Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
-CONST  . . . . . . . . . . . . .	32 Bit	 00000094 Para	  Public  'CONST'	 ReadOnly
+CONST  . . . . . . . . . . . . .	32 Bit	 00000090 Para	  Public  'CONST'	 ReadOnly
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 0000041C Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000002DA Para	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000002B3 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -316,12 +308,12 @@ GLOBAL_fs_1  . . . . . . . . . .	P Near	 0000006A _TEXT	Length= 00000043 Public 
   copy_loop0 . . . . . . . . . .	L Near	 00000095 _TEXT	
 SetConsoleCP . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 SetConsoleOutputCP . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 000000AD _TEXT	Length= 0000022D Public STDCALL
-  copy_loop1 . . . . . . . . . .	L Near	 0000017A _TEXT	
-  copy_loop2 . . . . . . . . . .	L Near	 0000018F _TEXT	
-  copy_loop3 . . . . . . . . . .	L Near	 000001E7 _TEXT	
-  FLAG0  . . . . . . . . . . . .	L Near	 00000234 _TEXT	
-  FOR_END0 . . . . . . . . . . .	L Near	 00000291 _TEXT	
+main . . . . . . . . . . . . . .	P Near	 000000AD _TEXT	Length= 00000206 Public STDCALL
+  copy_loop1 . . . . . . . . . .	L Near	 00000163 _TEXT	
+  copy_loop2 . . . . . . . . . .	L Near	 00000178 _TEXT	
+  copy_loop3 . . . . . . . . . .	L Near	 000001D0 _TEXT	
+  FLAG0  . . . . . . . . . . . .	L Near	 0000021D _TEXT	
+  FOR_END0 . . . . . . . . . . .	L Near	 0000027A _TEXT	
 
 
 Symbols:
@@ -349,21 +341,20 @@ __writeline  . . . . . . . . . .	L Near	 00000000 FLAT	External STDCALL
 __write  . . . . . . . . . . . .	L Near	 00000000 FLAT	External STDCALL
 fi_z_2 . . . . . . . . . . . . .	DWord	 00000000 _DATA	
 fs_c_2 . . . . . . . . . . . . .	Byte	 00000004 _DATA	
-l10  . . . . . . . . . . . . . .	DWord	 0000007A CONST	
-l11  . . . . . . . . . . . . . .	DWord	 0000007E CONST	
-l12  . . . . . . . . . . . . . .	Byte	 00000082 CONST	
-l13  . . . . . . . . . . . . . .	Byte	 00000089 CONST	
-l14  . . . . . . . . . . . . . .	Byte	 0000008B CONST	
-l15  . . . . . . . . . . . . . .	DWord	 00000090 CONST	
+l10  . . . . . . . . . . . . . .	DWord	 0000007B CONST	
+l11  . . . . . . . . . . . . . .	DWord	 0000007F CONST	
+l12  . . . . . . . . . . . . . .	Byte	 00000083 CONST	
+l13  . . . . . . . . . . . . . .	Byte	 0000008A CONST	
+l14  . . . . . . . . . . . . . .	DWord	 0000008C CONST	
 l1 . . . . . . . . . . . . . . .	DWord	 0000001C CONST	
 l2 . . . . . . . . . . . . . . .	DWord	 00000020 CONST	
 l3 . . . . . . . . . . . . . . .	DWord	 00000024 CONST	
-l4 . . . . . . . . . . . . . . .	DWord	 00000028 CONST	
-l5 . . . . . . . . . . . . . . .	DWord	 0000002C CONST	
-l6 . . . . . . . . . . . . . . .	DWord	 00000030 CONST	
-l7 . . . . . . . . . . . . . . .	Byte	 00000034 CONST	
-l8 . . . . . . . . . . . . . . .	Byte	 0000006B CONST	
-l9 . . . . . . . . . . . . . . .	DWord	 00000076 CONST	
+l4 . . . . . . . . . . . . . . .	Byte	 00000028 CONST	
+l5 . . . . . . . . . . . . . . .	DWord	 0000002D CONST	
+l6 . . . . . . . . . . . . . . .	DWord	 00000031 CONST	
+l7 . . . . . . . . . . . . . . .	Byte	 00000035 CONST	
+l8 . . . . . . . . . . . . . . .	Byte	 0000006C CONST	
+l9 . . . . . . . . . . . . . . .	DWord	 00000077 CONST	
 main_a_2 . . . . . . . . . . . .	DWord	 0000010C _DATA	
 main_b_2 . . . . . . . . . . . .	DWord	 00000110 _DATA	
 main_c_2 . . . . . . . . . . . .	DWord	 00000118 _DATA	

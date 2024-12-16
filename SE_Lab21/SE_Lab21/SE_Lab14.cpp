@@ -58,14 +58,11 @@ int _tmain(int argc, _TCHAR* argv[])
     Log::WriteLine(log, (char*)"Преобразование выражений в ПОЛИЗ:\n", "");
     PN::PolishNotation(lextable, idtable);
     Log::WriteAfterPN(log, lextable);
-    //for (int i = 0; i < lextable.size; i++) {
-    //  cout << lextable.table[i].lexema;
-    //}
 
     CG::GenerateCode(idtable, lextable, mfst);
       
     LT::Delete(lextable);
-    IT::Delete(idtable); // ошибка с параметрами формальными // переделать унарный минус 
+    IT::Delete(idtable);
 
 		Log::Close(log);
     cout << "Программа завершена успешно" << endl;

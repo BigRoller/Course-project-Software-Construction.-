@@ -8,6 +8,9 @@ static std::vector<LT::Entry> io_procedures;
 static bool isMain = false;
 static int flag_counter = 0;
 static std::stack<int> flag_stack;
+static bool isNeg = false;
+
+vector<string> extern_functions = { "__strlen", "__substr", "__stoi", "__write", "__writeline", "__writeint" };
 
 using namespace std;
 
@@ -67,6 +70,15 @@ void CG::CG::Head(CG& cg)
 			out << "\n";
 			}
 			else {
+				bool isFind = false;
+				for (int z = 0; z < extern_functions.size(); z++) {
+					if ((string)"__" + cg.lexT.table[i + 1].stringLexema == extern_functions[z]) {
+						isFind = true;
+						break;
+					}
+				}
+				if (isFind)
+				{
 				bool flag = false;
 				for (int j = 0; j < extern_procedures.size(); j++) {
 					if (extern_procedures[j].id == cg.lexT.table[i + 1].stringLexema) {
@@ -77,6 +89,10 @@ void CG::CG::Head(CG& cg)
 				if (!flag) {
 					extern_procedures.push_back(IT::GetEntry(cg.idT, cg.lexT.table[i + 1].idxTI + 1));
 					out << "extern " << "__" << cg.lexT.table[i + 1].stringLexema << " : PROC\n";
+				}
+			}
+				else {
+					throw ERROR_THROW_IN(500, cg.lexT.table[i + 1].sn, -1)
 				}
 			}
 		}
@@ -188,6 +204,9 @@ void CG::CG::WriteExpression(CG& cg, int k, int& index, char* buff)
 
 					}
 				}
+				if (stack.top().isNeg) {
+					index += GEN0(buff, EXPR_NEG, index);
+				}
 				stack.pop();
 			}
 		}
@@ -195,6 +214,10 @@ void CG::CG::WriteExpression(CG& cg, int k, int& index, char* buff)
 
 	for (int q = k + 1; cg.lexT.table[q].lexema != LEX_SEMICOLON; q++) {
 		if ((cg.lexT.table[q].lexema == LEX_LITERAL || cg.lexT.table[q].lexema == LEX_ID)) {
+			if (isNeg) {
+				cg.lexT.table[q].isNeg = true;
+				isNeg = !isNeg;
+			}
 			stack.push(cg.lexT.table[q]);
 		}
 		else if (cg.lexT.table[q].lexema == LEX_OPERATOR) {
@@ -235,16 +258,15 @@ void CG::CG::WriteExpression(CG& cg, int k, int& index, char* buff)
 			}
 		}
 		else if (cg.lexT.table[q].lexema == LEX_UNARY_MINUS) {
-			if (IT::GetEntry(cg.idT, cg.lexT.table[q - 1].idxTI + 1).idtype != IT::L) { ////////////////////////////
-				writeIDAndLiterals(stack, 1, buff, index);
-				index += GEN0(buff, EXPR_NEG, index);
-			}
+			isNeg = !isNeg;
 		}
-		else if (cg.lexT.table[q].lexema == CALL_FUNCTION) {
+		else if (cg.lexT.table[q].lexema == CALL_FUNCTION) {//////////////////
 			std::stack<LT::Entry> exportStack;
 			bool flag = false;
+			int i = q - 1;
+			for (;cg.lexT.table[i].idxTI == -1 || IT::GetEntry(cg.idT, cg.lexT.table[i].idxTI + 1).idtype != IT::F; i--) {}
 			for (int j = 0; j < extern_procedures.size(); j++) {
-				if (extern_procedures[j].id == cg.lexT.table[q - cg.lexT.table[q].operation - 1].stringLexema) {
+				if (extern_procedures[j].id == cg.lexT.table[i].stringLexema) {
 					flag = true;
 					break;
 				}
@@ -252,7 +274,7 @@ void CG::CG::WriteExpression(CG& cg, int k, int& index, char* buff)
 			if (flag) {
 				writeIDAndLiterals(stack, cg.lexT.table[q].operation, buff, index);
 				if (!stack.empty()) stack.pop();
-				index += GEN1(buff, EXPR_CALL, ("__" + cg.lexT.table[q - cg.lexT.table[q].operation - 1].stringLexema).c_str(), index);
+				index += GEN1(buff, EXPR_CALL, ("__" + cg.lexT.table[i].stringLexema).c_str(), index);
 			}
 			else {
 				while (!stack.empty()) {
@@ -261,7 +283,7 @@ void CG::CG::WriteExpression(CG& cg, int k, int& index, char* buff)
 				}
 				exportStack.pop();
 				writeIDAndLiterals(exportStack, cg.lexT.table[q].operation, buff, index);
-				index += GEN1(buff, EXPR_CALL, CHAR_ID(q - cg.lexT.table[q].operation - 1), index);
+				index += GEN1(buff, EXPR_CALL, CHAR_ID(i), index);
 			}
 		}
 	}
